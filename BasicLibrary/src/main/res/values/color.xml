@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  系统背景色  -->
+    <color name="app_system_color">#F4F4F4</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_black">#000000</color>
+
+    <color name="color_2C2C2C">#2C2C2C</color>
+    <color name="color_ccc">#CCCCCC</color>
+    <color name="color_ddd">#DDDDDD</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_B1B1BB">#B1B1BB</color>
+    <color name="color_DFDFDF">#DFDFDF</color>
+    <color name="color_ADADAD">#ADADAD</color>
+    <color name="color_F5F5F5">#F5F5F5</color>
+</resources>

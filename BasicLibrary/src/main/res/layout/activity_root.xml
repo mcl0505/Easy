@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <com.mh55.easy.widget.title.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_title_tv_center_color="@color/color_black"
+        app:bar_titie_tv_left_icon="@mipmap/icon_title_back_black"
+        app:bar_title_color="@color/color_white"
+        />
+
+    <FrameLayout
+        android:id="@+id/frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titleBar"
+        android:background="@color/app_system_color"/>
+
+    <TextView
+        android:id="@+id/tagBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="debug"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:background="#33CBDDC2"
+        android:textColor="@color/color_333333"
+        android:paddingVertical="2dp"
+        android:paddingHorizontal="5dp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

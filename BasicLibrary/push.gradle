@@ -1,0 +1,54 @@
+//ali云效-设置仓库凭证
+//apply plugin: 'maven-publish'
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                groupId = 'com.mh55.easy'  //包名-随便起
+//                artifactId = project.name  //别名-随便起
+//                version = '1.0.5'  //版本号
+//            }
+//        }
+//        repositories {
+//            maven {
+//                url = "https://packages.aliyun.com/maven/repository/2458920-release-iJKwNH"
+//                credentials {
+//                    username = '65d811f9ff6f3c5a8080d7ee'
+//                    password = 's7GXY3l3PU6i'
+//                }
+//            }
+//        }
+//    }
+//}
+
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+group 'com.mh55.easy'
+version '1.0.6'
+def artifactId = 'basicLibrary'
+
+apply plugin: 'maven-publish'
+afterEvaluate {
+    publishing {
+        publications {
+            plugin(MavenPublication) {
+                from components.java
+                groupId = '$project.group'
+                artifactId = '$artifactId'
+                version = '$project.version'
+            }
+        }
+        repositories {
+            maven {
+                url = 'https://packages.aliyun.com/maven/repository/2458920-release-iJKwNH'
+                credentials {
+                    username = '65d811f9ff6f3c5a8080d7ee'
+                    password = 's7GXY3l3PU6i'
+                }
+            }
+        }
+    }
+}

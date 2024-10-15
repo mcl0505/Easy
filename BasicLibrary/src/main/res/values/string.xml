@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_exit">再按一次退出程序</string>
+
+    <string name="mv_net_cancel">请求取消</string>
+    <string name="mv_net_unknown">请求失败，请稍后再试。</string>
+    <string name="mv_net_parse">解析错误，请稍后再试。</string>
+    <string name="mv_net_timeout">请求超时，请稍后再试。</string>
+    <string name="mv_net_network">网络连接错误，请稍后重试。</string>
+    <string name="mv_net_ssl">证书出错，请稍后再试。</string>
+
+    <string name="channel_message">聊天消息</string>
+    <string name="channel_mention">\@提醒消息</string>
+    <string name="channel_notice">系统通知</string>
+    <string name="channel_call">音视频通话</string>
+
+    <string name="loading_msg">加载中</string>
+
+    <string name="network_error">当前无网络，请检查你的网络设置</string>
+    <string name="network_no_host">服务器异常</string>
+    <string name="notify_no_network">网络连接不可用，请稍后重试！</string>
+    <string name="time_out_please_try_again_later">连接超时,请稍后再试</string>
+    <string name="esky_service_exception">网络不给力，请稍候重试！</string>
+    <string name="et_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+</resources>
