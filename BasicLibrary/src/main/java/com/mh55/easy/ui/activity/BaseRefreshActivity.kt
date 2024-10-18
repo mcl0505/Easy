@@ -38,6 +38,7 @@ abstract class BaseRefreshActivity<VDB : ViewDataBinding, BRVM : BaseViewModel,V
         super.onResume()
         if (isResumeRefresh()){
             mPage = 1
+            mAdapter.mOffset = 0
             onRefreshData()
         }
     }
@@ -73,6 +74,7 @@ abstract class BaseRefreshActivity<VDB : ViewDataBinding, BRVM : BaseViewModel,V
                  */
                 override fun onRefresh(refreshLayout: RefreshLayout) {
                     mPage = 1
+                    mAdapter.mOffset = 0
                     onRefreshData()
                 }
 
@@ -81,15 +83,17 @@ abstract class BaseRefreshActivity<VDB : ViewDataBinding, BRVM : BaseViewModel,V
                  */
                 override fun onLoadMore(refreshLayout: RefreshLayout) {
                     mPage += 1
+                    mAdapter.mOffset = mAdapter.data.size
                     onRefreshData()
                 }
 
             })
-            setEnableLoadMore(false)
+            setEnableLoadMore(true)
         }
 
         if (!isResumeRefresh()){
             mPage = 1
+            mAdapter.mOffset = 0
             onRefreshData()
         }
     }

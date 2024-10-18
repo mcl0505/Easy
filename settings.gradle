@@ -44,3 +44,4 @@ rootProject.name = "EasyBasic"
 include ':app'
 include ':BasicLibrary'
 //include ':EasyLibrary'
+include ':Httplibrary'

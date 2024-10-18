@@ -147,8 +147,11 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
     //判断当前是否是刷新或者首次请求
     var isFirst = this.mOffset == 0
 
-    if (isFirst) {
+    if (this.mOffset == 0){
         this.setNewInstance(mutableListOf())
+    }
+
+    if (isFirst) {
 
         if (mList == null || mList.size == 0) {
             if (emptyLayout == 0){
@@ -163,7 +166,6 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
     } else {
         this.addData(mList!!)
     }
-
 
     this.mOffset = data.size
 

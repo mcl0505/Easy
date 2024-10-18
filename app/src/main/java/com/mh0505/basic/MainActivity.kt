@@ -22,8 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
             }
             mDragView.isAdsorbent = false
             mDragView.onFloastClick = {
-//                "点击了悬浮按钮".toast()
-                AppConfig.mAppListener.onErrorTip(100,"错误形象")
             }
 
         }

@@ -13,7 +13,7 @@ import com.mh55.easy.app.AppConfig
  * dp 转 px
  */
 fun dp2px(dpValue: Float): Int {
-    val scale = AppConfig.mApplication.resources.displayMetrics.density
+    val scale = AppConfig.mApplication!!.resources.displayMetrics.density
     return (dpValue * scale + 0.5f).toInt()
 }
 
@@ -21,7 +21,7 @@ fun dp2px(dpValue: Float): Int {
  * 描述: px 转 dp
  */
 fun px2dp(pxValue: Float): Int {
-    val scale = AppConfig.mApplication.resources.displayMetrics.density
+    val scale = AppConfig.mApplication!!.resources.displayMetrics.density
     return (pxValue / scale + 0.5f).toInt()
 }
 
@@ -29,7 +29,7 @@ fun px2dp(pxValue: Float): Int {
  * sp 转 px
  */
 fun sp2px(spValue: Float): Int {
-    val scale = AppConfig.mApplication.resources.displayMetrics.scaledDensity
+    val scale = AppConfig.mApplication!!.resources.displayMetrics.scaledDensity
     return (spValue * scale + 0.5f).toInt()
 }
 
@@ -37,6 +37,6 @@ fun sp2px(spValue: Float): Int {
  * px 转 sp
  */
 fun px2sp(pxValue: Float): Int {
-    val scale = AppConfig.mApplication.resources.displayMetrics.scaledDensity
+    val scale = AppConfig.mApplication!!.resources.displayMetrics.scaledDensity
     return (pxValue / scale + 0.5f).toInt()
 }

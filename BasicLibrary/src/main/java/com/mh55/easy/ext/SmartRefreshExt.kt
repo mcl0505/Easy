@@ -28,7 +28,7 @@ fun <T> MutableList<T>.isLoadMore() = this.size == ConfigBuilder.RefreshPageConf
 
 fun SmartRefreshLayout.noMoreData(isLoadMore: Boolean = false) {
     this.apply {
-        finish(isLoadMore)
+        finish()
     }
 }
 
@@ -36,7 +36,5 @@ fun SmartRefreshLayout.finish(isLoadMore: Boolean = true) {
     this.apply {
         closeHeaderOrFooter()
         setEnableLoadMore(isLoadMore)
-        finishLoadMoreWithNoMoreData()
-
     }
 }

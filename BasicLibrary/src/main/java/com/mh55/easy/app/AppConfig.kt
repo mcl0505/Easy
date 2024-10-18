@@ -7,11 +7,13 @@ import com.mh55.easy.manager.AppManager
 import com.mh55.easy.utils.AppListener
 
 object AppConfig {
-    lateinit var mApplication: Application
-    lateinit var mAppListener: AppListener
-    fun init(application: Application,listener: AppListener){
+    var mApplication: Application?=null
+    fun init(application: Application){
+        if (application == null){
+            throw Exception("application is null")
+        }
+
         this.mApplication = application
-        this.mAppListener = listener
         AppManager.register(application)
         Utils.init(application)
         CrashHelper.initCrashHandler(application)
