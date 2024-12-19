@@ -66,6 +66,7 @@ public class AESUtils {
             String originalString = new String(original, "utf-8");
             return originalString;
         } catch (Exception ex) {
+            ex.printStackTrace();
             return null;
         }
     }

@@ -250,4 +250,5 @@ class MyKotlinJsonAdapterFactory : JsonAdapter.Factory {
             options
         ).nullSafe()
     }
+
 }
