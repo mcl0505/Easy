@@ -10,31 +10,45 @@ android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 24
+        minSdk 21
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
+        debug {
+        }
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 开启混淆
+            minifyEnabled false
+            // Zipalign压缩优化
+            zipAlignEnabled true
+            // 移除无用的资源文件
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+//DataBinding 使用配置
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
-    }
-    lint {
-        baseline = file("lint-baseline.xml")
     }
 }
 
@@ -46,6 +60,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //TODO  DSL 封装库
+    implementation 'org.jetbrains.anko:anko-sdk25:0.10.8'
+    implementation 'org.jetbrains.anko:anko-appcompat-v7:0.10.8'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.20'
+
     def moshiVersion = '1.13.0'
     def retrofitVersion = '2.9.0'
     def okhttpVersion = '4.9.0'

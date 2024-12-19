@@ -1,4 +1,4 @@
-package com.hhqc.rctdriver.http
+package com.mh.http
 
 import com.mh.http.moshi.MoshiUtils
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -14,19 +14,19 @@ import java.io.File
  */
 open class BaseRepository {
     /**post 传递json   map**/
-    fun postJson(map: Map<String, Any?>): RequestBody = RequestBody.create(
+    open fun postJson(map: Map<String, Any?>): RequestBody = RequestBody.create(
         "application/json;charset=UTF-8".toMediaTypeOrNull(),
         MoshiUtils.toJson(map)
     )
 
     /**post 传递json   Any**/
-    fun postJson(bean: Any): RequestBody = RequestBody.create(
+    open fun postJson(bean: Any): RequestBody = RequestBody.create(
         "application/json;charset=UTF-8".toMediaTypeOrNull(),
         MoshiUtils.toJson(bean)
     )
 
     /**文件上传**/
-    fun fileToPart(filePath:String,uploadKey:String):MultipartBody.Part{
+    open fun fileToPart(filePath:String,uploadKey:String):MultipartBody.Part{
         val file = File(filePath)
         val fileRQ: RequestBody = RequestBody.create("image/jpg".toMediaTypeOrNull(), file)
         val part: MultipartBody.Part =

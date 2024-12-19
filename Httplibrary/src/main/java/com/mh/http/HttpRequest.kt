@@ -1,7 +1,6 @@
 package com.mh.http
 
-import com.mcl.net.config.NetBase
-import com.mcl.net.util.SSLContextUtil
+import com.mh.http.ssl.SSLContextUtil
 import com.mh.http.moshi.MyKotlinJsonAdapterFactory
 import com.mh.http.moshi.MyStandardJsonAdapters
 import com.squareup.moshi.Moshi
