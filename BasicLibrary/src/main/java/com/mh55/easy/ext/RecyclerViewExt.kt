@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
+import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -139,7 +140,7 @@ fun RecyclerView.dividerSpace(
  */
 fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
     mList: MutableList<T>?=null,
-    @DrawableRes mDrawable: Int = ConfigBuilder.RefreshPageConfig.mEmptyImage,
+    mDrawable: Drawable = ConfigBuilder.RefreshPageConfig.mEmptyImage.toDrawable(),
     isShowText: String = ConfigBuilder.RefreshPageConfig.mEmptyTipText,
     @LayoutRes emptyLayout: Int = 0,
     marginTop:Int = 150
@@ -182,7 +183,7 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
  */
 fun <T> BindAdapter<T, *>.setAdapterEmptyOrListPage(
     mList: MutableList<T>?=null,
-    @DrawableRes mDrawable: Int = ConfigBuilder.RefreshPageConfig.mEmptyImage,
+    mDrawable: Drawable = ConfigBuilder.RefreshPageConfig.mEmptyImage.toDrawable(),
     isShowText: String = ConfigBuilder.RefreshPageConfig.mEmptyTipText,
     @LayoutRes emptyLayout: Int = 0,
     marginTop:Int = 150

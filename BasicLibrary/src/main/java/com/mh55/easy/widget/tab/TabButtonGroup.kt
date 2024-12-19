@@ -39,7 +39,7 @@ class TabButtonGroup @JvmOverloads constructor(
         val count = childCount
         while (i < count) {
             val v = getChildAt(i)
-            v.tag = i
+            v.id = i
             v.setOnClickListener(this)
             mList.add(v as TabButton)
             i++
@@ -47,7 +47,7 @@ class TabButtonGroup @JvmOverloads constructor(
     }
 
     override fun onClick(v: View) {
-        val tag = v.tag
+        val tag = v.id
         if (tag != null) { //            cancelAnim();
 
             val position = tag as Int
@@ -101,10 +101,12 @@ class TabButtonGroup @JvmOverloads constructor(
     }
 
     fun setSelectClick(selectPosition: Int) {
+        mList[selectPosition].setChecked(true)
         mList[selectPosition].performClick()
     }
 
     fun selectPosition(selectPosition: Int) {
+
     }
 }
 

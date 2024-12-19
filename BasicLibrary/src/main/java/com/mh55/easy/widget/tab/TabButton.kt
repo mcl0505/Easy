@@ -1,6 +1,7 @@
 package com.mh55.easy.widget.tab
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.mh55.easy.R
+import com.mh55.easy.ext.getDrawable
 
 /**
  * 公司：
@@ -27,11 +29,13 @@ class TabButton @JvmOverloads constructor(
     private val mTip: String?
     private val mIconSize: Int
     private val mTextSize: Int
-    private val mTextColor: Int
-    private val mTextSelectColor: Int
+     var mTextColor: Int
+     var mTextSelectColor: Int
     private var mChecked: Boolean
     private var mImg: ImageView? = null
     private var mText: TextView? = null
+    var mSelectIconDrawable: Drawable ?= null
+    var mUnSelectIconDrawable: Drawable ?= null
     override fun onFinishInflate() {
         super.onFinishInflate()
         orientation = VERTICAL
@@ -50,10 +54,10 @@ class TabButton @JvmOverloads constructor(
         mText!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize.toFloat())
         mText!!.text = mTip
         if (mChecked) {
-            mImg!!.setImageResource(mSelectedIcon)
+            mImg!!.setImageDrawable(mSelectIconDrawable)
             mText!!.setTextColor(mTextSelectColor)
         } else {
-            mImg!!.setImageResource(mUnSelectedIcon)
+            mImg!!.setImageDrawable(mUnSelectIconDrawable)
             mText!!.setTextColor(mTextColor)
         }
         addView(mImg)
@@ -63,10 +67,10 @@ class TabButton @JvmOverloads constructor(
     fun setChecked(checked: Boolean) {
         mChecked = checked
         if (checked) {
-            mImg!!.setImageResource(mSelectedIcon)
+            mImg!!.setImageDrawable(mSelectIconDrawable)
             mText!!.setTextColor(mTextSelectColor)
         } else {
-            mImg!!.setImageResource(mUnSelectedIcon)
+            mImg!!.setImageDrawable(mUnSelectIconDrawable)
             mText!!.setTextColor(mTextColor)
         }
     }
@@ -87,6 +91,9 @@ class TabButton @JvmOverloads constructor(
         mTextSelectColor =
             ta.getColor(R.styleable.TabButton_tbn_text_select_color, -0x1000000)
         mChecked = ta.getBoolean(R.styleable.TabButton_tbn_checked, false)
+
+        mSelectIconDrawable = mSelectedIcon.getDrawable()
+        mUnSelectIconDrawable = mUnSelectedIcon.getDrawable()
         ta.recycle()
     }
 }

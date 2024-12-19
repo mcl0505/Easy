@@ -8,11 +8,6 @@ import com.mh55.easy.utils.AppListener
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        AppConfig.init(this,object :AppListener{
-            override fun onErrorTip(code: Int, msg: String) {
-                msg.toast()
-            }
-
-        })
+        AppConfig.init(this)
     }
 }
