@@ -30,6 +30,7 @@ import com.mh55.easy.mvvm.intent.BaseViewIntent
 import com.mh55.easy.ui.ILoading
 import com.mh55.easy.ui.IView
 import com.mh55.easy.ui.dialog.LoadingDialog
+import com.mh55.easy.utils.SoftHideKeyBoardUtil
 import com.mh55.easy.utils.StatusBarUtils
 import com.mh55.easy.widget.title.TitleBar
 import java.lang.reflect.ParameterizedType
@@ -67,6 +68,8 @@ abstract class AbsActivity<V : ViewDataBinding, VM : BaseViewModel> :
         super.onCreate(savedInstanceState)
         AppManager.add(this)
         mContext = this
+        //解决键盘遮挡输入框
+        SoftHideKeyBoardUtil.assistActivity(this)
         //app 全局置灰处理
         window.decorView.changeGray(ConfigBuilder.isGray)
         //全屏 透明状态栏

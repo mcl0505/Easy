@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.widget.RelativeLayout
-import com.mh55.easy.utils.StatusBarUtils.getStatusBarHeight
 
 /**
  * 公司：~漫漫人生路~总得错几步~
@@ -30,5 +29,21 @@ class StatusBarView @JvmOverloads constructor(context: Context, attrs: Attribute
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mStatusBarHeight = getStatusBarHeight(context)
         }
+    }
+
+    /**
+     * 获取状态栏高度
+     */
+    fun getStatusBarHeight(context: Context): Int {
+        var mStatusBarHeight = 0
+
+        if (mStatusBarHeight == 0) {
+            val res = context.resources
+            val resourceId = res.getIdentifier("status_bar_height", "dimen", "android")
+            if (resourceId > 0) {
+                mStatusBarHeight = res.getDimensionPixelSize(resourceId)
+            }
+        }
+        return mStatusBarHeight
     }
 }

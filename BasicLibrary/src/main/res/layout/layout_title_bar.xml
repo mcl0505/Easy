@@ -3,13 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
     <com.mh55.easy.widget.title.StatusBarView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        tools:layout_height="50dp"
+        >
         <LinearLayout
             android:id="@+id/title_bar_left"
             app:layout_constraintTop_toTopOf="@id/title_bar_center"
@@ -46,6 +49,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@android:color/white"
+            tools:textColor="@android:color/black"
+            tools:text="标题"
             android:singleLine="true"
             android:gravity="center"
             android:ellipsize="end"
@@ -87,5 +92,6 @@
         android:id="@+id/titleLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:background="@color/color_ddd"/>
 </LinearLayout>

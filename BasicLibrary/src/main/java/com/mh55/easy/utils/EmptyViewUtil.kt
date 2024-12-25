@@ -11,7 +11,6 @@ import android.widget.ImageView
 import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.mh55.easy.R
-import com.mh55.easy.ext.getDrawable
 import com.mh55.easy.ext.toDp
 
 /**

@@ -44,21 +44,7 @@ object StatusBarUtils {
 
     }
 
-    /**
-     * 获取状态栏高度
-     */
-    fun getStatusBarHeight(context: Context): Int {
-        var mStatusBarHeight = 0
 
-        if (mStatusBarHeight == 0) {
-            val res = context.resources
-            val resourceId = res.getIdentifier("status_bar_height", "dimen", "android")
-            if (resourceId > 0) {
-                mStatusBarHeight = res.getDimensionPixelSize(resourceId)
-            }
-        }
-        return mStatusBarHeight
-    }
 
 
 }
