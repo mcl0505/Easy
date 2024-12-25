@@ -65,6 +65,7 @@ abstract class AbsActivity<V : ViewDataBinding, VM : BaseViewModel> :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppManager.add(this)
         mContext = this
         //app 全局置灰处理
         window.decorView.changeGray(ConfigBuilder.isGray)
