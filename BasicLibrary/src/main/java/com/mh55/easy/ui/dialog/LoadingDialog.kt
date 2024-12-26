@@ -3,6 +3,7 @@ package com.mh55.easy.ui.dialog
 import android.app.Dialog
 import android.content.Context
 import android.view.animation.Animation
+import android.view.animation.Animation.INFINITE
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
@@ -32,7 +33,7 @@ class LoadingDialog(context: Context,val msg:String =  "加载中") : Dialog(
             0.5f
         )
         animation.duration = 2000
-        animation.repeatCount = 10
+        animation.repeatCount = INFINITE
         animation.fillAfter = true
         imageView.startAnimation(animation)
         textView.text = msg
