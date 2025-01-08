@@ -37,7 +37,7 @@ android {
             // 开启混淆
             minifyEnabled false
             // Zipalign压缩优化
-            zipAlignEnabled true
+            zipAlignEnabled false
             // 移除无用的资源文件
 //            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'

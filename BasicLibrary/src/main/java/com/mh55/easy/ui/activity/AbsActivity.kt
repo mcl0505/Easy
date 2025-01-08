@@ -139,50 +139,64 @@ abstract class AbsActivity<V : ViewDataBinding, VM : BaseViewModel> :
     open fun setTitleText(): String = ""
 
     override fun initBaseLiveData() {
-        mViewModel.mUiChangeLiveData.observe(this) {
-            when (it) {
-                is BaseViewIntent.finish -> {
-                    if (it.resultCode != null) {
-                        setResult(
-                            it.resultCode,
-                            getIntentByMapOrBundle(this, null, it.map, it.bundle)
-                        )
+        mViewModel.mUiChangeLiveData.observe(this) {viewIntent->
+            viewIntent?.let {
+                when (it) {
+                    is BaseViewIntent.finish -> {
+                        it?.let {
+                            if (it.resultCode != null) {
+                                setResult(
+                                    it.resultCode,
+                                    getIntentByMapOrBundle(this, null, it.map, it.bundle)
+                                )
+                            }
+
+                            finish()
+                        }
                     }
 
-                    finish()
-                }
-
-                is BaseViewIntent.startActivity -> {
-                    startActivity(getIntentByMapOrBundle(this, it.clazz, it.map, it.bundle))
-                }
-
-                is BaseViewIntent.startActivityForResult -> {
-                    mStartActivityForResult.launch(
-                        getIntentByMapOrBundle(
-                            this,
-                            it.clazz,
-                            it.map,
-                            it.bundle
-                        )
-                    )
-                }
-
-                is BaseViewIntent.setResult -> {
-                    if (it.data == null) {
-                        val intent = getIntentByMapOrBundle(this, null, it.map, it.bundle)
-                        setResult(it.resultCode, intent)
-                    } else {
-                        setResult(it.resultCode, it.data)
+                    is BaseViewIntent.startActivity -> {
+                        it?.let {
+                            startActivity(getIntentByMapOrBundle(this, it.clazz, it.map, it.bundle))
+                        }
                     }
 
-                }
+                    is BaseViewIntent.startActivityForResult -> {
+                        it?.let {
+                            mStartActivityForResult.launch(
+                                getIntentByMapOrBundle(
+                                    this,
+                                    it.clazz,
+                                    it.map,
+                                    it.bundle
+                                )
+                            )
+                        }
+                    }
 
-                is BaseViewIntent.showLoading -> {
-                    if (it.isShow) {
-                        showLoading(it.showMsg)
-                    } else dismissLoading()
+                    is BaseViewIntent.setResult -> {
+                        it?.let {
+                            if (it.data == null) {
+                                val intent = getIntentByMapOrBundle(this, null, it.map, it.bundle)
+                                setResult(it.resultCode, intent)
+                            } else {
+                                setResult(it.resultCode, it.data)
+                            }
+                        }
+
+                    }
+
+                    is BaseViewIntent.showLoading -> {
+                        it?.let {
+                            if (it.isShow) {
+                                showLoading(it.showMsg)
+                            } else dismissLoading()
+                        }
+
+                    }
                 }
             }
+
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Application
 import com.blankj.utilcode.util.Utils
 import com.mh55.easy.helper.CrashHelper
 import com.mh55.easy.manager.AppManager
+import com.mh55.easy.utils.ActivityRouter
 import com.mh55.easy.utils.AppListener
 
 object AppConfig {
@@ -15,6 +16,7 @@ object AppConfig {
 
         this.mApplication = application
         AppManager.register(application)
+        ActivityRouter.init(mApplication)
         Utils.init(application)
         CrashHelper.initCrashHandler(application)
     }

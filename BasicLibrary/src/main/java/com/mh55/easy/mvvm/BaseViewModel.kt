@@ -26,7 +26,7 @@ open class BaseViewModel : ViewModel(), DefaultLifecycleObserver, IActivityResul
     override fun getBundle(): Bundle? = mBundle
     override fun getArgumentsIntent(): Intent? = mIntent
 
-    val mUiChangeLiveData = SingleLiveEvent<BaseViewIntent>()
+    val mUiChangeLiveData by lazy { SingleLiveEvent<BaseViewIntent>() }
     override fun startActivity(clazz: Class<out Activity>, map: MutableMap<String, *>?, bundle: Bundle?) {
         mUiChangeLiveData.postValue(BaseViewIntent.startActivity(clazz, map, bundle))
     }

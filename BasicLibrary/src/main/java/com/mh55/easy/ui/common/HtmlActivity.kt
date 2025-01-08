@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.mh55.easy.databinding.ActivityHtmlBinding
 import com.mh55.easy.manager.AppManager
@@ -60,6 +63,20 @@ class HtmlActivity : BaseActivity<ActivityHtmlBinding, BaseViewModel>() {
                 // 特别注意：5.1以上默认禁止了https和http混用，以下方式是开启
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                }
+            }
+            //如果不设置WebViewClient，请求会跳转系统浏览器
+            webViewClient = object : WebViewClient(){
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    val url = request?.url.toString()
+                    if (url.startsWith("http://") || url.startsWith("https://")){
+                        view?.loadUrl(url)
+                        return true
+                    }
+                    return false
                 }
             }
             //清除网页访问留下的缓存
