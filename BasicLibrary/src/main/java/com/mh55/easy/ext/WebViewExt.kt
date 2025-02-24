@@ -9,16 +9,6 @@ import android.webkit.WebViewClient
 
 fun WebView.addCustomLoadUrl(url:String){
     with(this) {
-        webViewClient = object : WebViewClient(){
-            override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?
-            ): Boolean {
-                view?.loadUrl(request?.url.toString())
-                return true
-            }
-
-        }
         settings.apply {
             //如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript
             // 若加载的 html 里有JS 在执行动画等操作，会造成资源浪费（CPU、电量）

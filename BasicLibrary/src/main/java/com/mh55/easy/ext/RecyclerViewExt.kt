@@ -22,8 +22,12 @@ enum class DividerOrientation {
     VERTICAL, HORIZONTAL, GRID
 }
 
-fun <T,DB: ViewDataBinding> RecyclerView.addAdapter(list: MutableList<T>,layout:Int,block:(holder: BaseViewHolder, item: T, binding: DB)->Unit): BindAdapter<T,DB>{
-    val mAdapter  = object : BindAdapter<T, DB>(layout) {
+fun <T, DB : ViewDataBinding> RecyclerView.addAdapter(
+    list: MutableList<T>,
+    layout: Int,
+    block: (holder: BaseViewHolder, item: T, binding: DB) -> Unit
+): BindAdapter<T, DB> {
+    val mAdapter = object : BindAdapter<T, DB>(layout) {
         override fun convertBind(holder: BaseViewHolder, item: T, binding: DB) {
             block.invoke(holder, item, binding)
         }
@@ -139,28 +143,38 @@ fun RecyclerView.dividerSpace(
  * @param marginTop 图片距离顶部距离
  */
 fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
-    mList: MutableList<T>?=null,
+    mList: MutableList<T>? = null,
     mDrawable: Drawable = ConfigBuilder.RefreshPageConfig.mEmptyImage.toDrawable(),
     isShowText: String = ConfigBuilder.RefreshPageConfig.mEmptyTipText,
     @LayoutRes emptyLayout: Int = 0,
-    marginTop:Int = 150
+    marginTop: Int = 150,
+    marginBottom: Int = 10
 ) {
     //判断当前是否是刷新或者首次请求
     var isFirst = this.mOffset == 0
 
-    if (this.mOffset == 0){
+    if (this.mOffset == 0) {
         this.setNewInstance(mutableListOf())
     }
 
     if (isFirst) {
 
         if (mList == null || mList.size == 0) {
-            if (emptyLayout == 0){
-                this.setEmptyView(EmptyViewUtil.setEmptyView(this.context,this.recyclerView,mDrawable,isShowText,marginTop = marginTop))
-            }else {
+            if (emptyLayout == 0) {
+                this.setEmptyView(
+                    EmptyViewUtil.setEmptyView(
+                        this.context,
+                        this.recyclerView,
+                        mDrawable,
+                        isShowText,
+                        marginTop = marginTop,
+                        marginBottom = marginBottom
+                    )
+                )
+            } else {
                 this.setEmptyView(emptyLayout)
             }
-        }else {
+        } else {
             this.setNewInstance(mList)
         }
 
@@ -182,11 +196,11 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
  * @param marginTop 图片距离顶部距离
  */
 fun <T> BindAdapter<T, *>.setAdapterEmptyOrListPage(
-    mList: MutableList<T>?=null,
+    mList: MutableList<T>? = null,
     mDrawable: Drawable = ConfigBuilder.RefreshPageConfig.mEmptyImage.toDrawable(),
     isShowText: String = ConfigBuilder.RefreshPageConfig.mEmptyTipText,
     @LayoutRes emptyLayout: Int = 0,
-    marginTop:Int = 150
+    marginTop: Int = 150
 ) {
     //判断当前是否是刷新或者首次请求
     var isFirst = this.mPage == 1
@@ -195,12 +209,20 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListPage(
         this.setNewInstance(mutableListOf())
 
         if (mList == null || mList.size == 0) {
-            if (emptyLayout == 0){
-                this.setEmptyView(EmptyViewUtil.setEmptyView(this.context,this.recyclerView,mDrawable,isShowText,marginTop = marginTop))
-            }else {
+            if (emptyLayout == 0) {
+                this.setEmptyView(
+                    EmptyViewUtil.setEmptyView(
+                        this.context,
+                        this.recyclerView,
+                        mDrawable,
+                        isShowText,
+                        marginTop = marginTop
+                    )
+                )
+            } else {
                 this.setEmptyView(emptyLayout)
             }
-        }else {
+        } else {
             this.setNewInstance(mList)
         }
 

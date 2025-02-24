@@ -22,12 +22,13 @@ object EmptyViewUtil {
         recyclerView: RecyclerView,
         mDrawable: Drawable = R.mipmap.empty_pic_data.toDrawable(),
         desc: String = "暂无数据",
-        marginTop:Int = 150
+        marginTop:Int = 150,
+        marginBottom:Int = 10
     ): View {
         val inflate =
             LayoutInflater.from(context).inflate(R.layout.view_no_data, recyclerView, false)
+        val tvDesc = inflate.findViewById<TextView>(R.id.no_data_tv)
         if (!TextUtils.isEmpty(desc)) {
-            val tvDesc = inflate.findViewById<TextView>(R.id.no_data_tv)
             tvDesc.text = desc
         }
         val imgDesc = inflate.findViewById<ImageView>(R.id.img_no_data)
@@ -38,6 +39,10 @@ object EmptyViewUtil {
         val params = imgDesc.layoutParams as ViewGroup.MarginLayoutParams
         params.topMargin = marginTop.toDp()
         imgDesc.layoutParams = params
+
+        val paramsTv = tvDesc.layoutParams as ViewGroup.MarginLayoutParams
+        paramsTv.bottomMargin = marginBottom.toDp()
+        tvDesc.layoutParams = paramsTv
         return inflate
     }
 

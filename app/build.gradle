@@ -51,11 +51,11 @@ dependencies {
     implementation 'androidx.activity:activity:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    //基类库
+    implementation 'com.mh.basic:basiclibrary:1.0.2'
+
 //    api 'com.mh55.easy:BasicLibrary:1.0.9'
     implementation project(path: ':BasicLibrary')
-    implementation "com.tencent.rfix:RFix-android-lib:2.0.0-beta2"
-    compileOnly "com.tencent.rfix:RFix-android-anno:2.0.0-beta2"
-    kapt "com.tencent.rfix:RFix-android-anno:2.0.0-beta2"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

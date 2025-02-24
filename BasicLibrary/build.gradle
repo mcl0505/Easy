@@ -6,7 +6,31 @@ plugins {
     id 'kotlin-parcelize'
     id 'maven-publish'
 }
+group 'com.mh55.easy'
+version '1.0.0'
+def artifactId = 'BasicLibrary'
 
+apply plugin: 'maven-publish'
+afterEvaluate {
+    publishing {
+        publications {
+            plugin(MavenPublication) {
+                groupId = '$project.group'
+                artifactId = '$artifactId'
+                version = '$project.version'
+            }
+        }
+        repositories {
+            maven {
+                url = 'https://packages.aliyun.com/65f293e91febde2b6c5134c5/maven/repo-dznym'
+                credentials {
+                    username = '65d811f9ff6f3c5a8080d7ee'
+                    password = 's7GXY3l3PU6i'
+                }
+            }
+        }
+    }
+}
 
 android {
     namespace 'com.mh55.easy'
@@ -75,8 +99,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     // TODO =======================================  AndroidX  ======================================================
     // TODO  方法数超限解决方案
     implementation 'androidx.multidex:multidex:2.0.1'

@@ -12,6 +12,20 @@ pluginManagement {
         flatDir {
             dirs 'libs'
         }
+        maven {
+            credentials {
+                username '65d811f9ff6f3c5a8080d7ee'
+                password 's7GXY3l3PU6i'
+            }
+            url 'https://packages.aliyun.com/65f293e91febde2b6c5134c5/maven/repo-dznym'
+        }
+        maven {
+            credentials {
+                username '65d811f9ff6f3c5a8080d7ee'
+                password 's7GXY3l3PU6i'
+            }
+            url 'https://packages.aliyun.com/65f293e91febde2b6c5134c5/maven/2458920-release-ijkwnh'
+        }
     }
 }
 
@@ -31,12 +45,20 @@ dependencyResolutionManagement {
             dirs 'libs'
 
         }
+
         maven {
             credentials {
                 username '65d811f9ff6f3c5a8080d7ee'
                 password 's7GXY3l3PU6i'
             }
-            url 'https://packages.aliyun.com/maven/repository/2458920-release-iJKwNH'
+            url 'https://packages.aliyun.com/65f293e91febde2b6c5134c5/maven/repo-dznym'
+        }
+        maven {
+            credentials {
+                username '65d811f9ff6f3c5a8080d7ee'
+                password 's7GXY3l3PU6i'
+            }
+            url 'https://packages.aliyun.com/65f293e91febde2b6c5134c5/maven/2458920-release-ijkwnh'
         }
     }
 }
@@ -45,4 +67,3 @@ include ':app'
 include ':BasicLibrary'
 //include ':EasyLibrary'
 include ':Httplibrary'
-include ':permissionlibrary'
