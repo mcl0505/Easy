@@ -37,6 +37,8 @@ public class ImageSelectDialog extends BaseDialogFragment implements View.OnClic
     private int chooseType;
     //单选或者多选   ture单选   flase多选
     private boolean isSingle;
+    //单选或者多选   ture单选   flase多选
+    private boolean isDisplayCamera;
     //是否压缩
     private boolean isCompress;
     //是否裁剪
@@ -113,6 +115,7 @@ public class ImageSelectDialog extends BaseDialogFragment implements View.OnClic
                 .setMaxSelectNum(isSingle?1:3)
                 .isPreviewAudio(true)
                 .setLanguage(LanguageConfig.CHINESE)
+                .isDisplayCamera(isDisplayCamera)
                 .forResult(new OnResultCallbackListener<LocalMedia>() {
                     @Override
                     public void onResult(ArrayList<LocalMedia> result) {
@@ -188,6 +191,7 @@ public class ImageSelectDialog extends BaseDialogFragment implements View.OnClic
     public ImageSelectDialog(Builder builder) {
         this.chooseType = builder.chooseType;
         this.isSingle = builder.isSingle;
+        this.isDisplayCamera = builder.isDisplayCamera;
         this.enableCrop = builder.enableCrop;
         this.isCompress = builder.isCompress;
         this.mTitle1 = builder.mTitle1;
@@ -205,6 +209,7 @@ public class ImageSelectDialog extends BaseDialogFragment implements View.OnClic
         private int chooseType = SelectMimeType.ofImage();
         //单选或者多选   ture单选   flase多选
         private boolean isSingle = true;
+        private boolean isDisplayCamera = true;
         //是否压缩
         private boolean isCompress = true;
         //是否裁剪
@@ -227,6 +232,11 @@ public class ImageSelectDialog extends BaseDialogFragment implements View.OnClic
 
         public Builder setSingle(boolean single) {
             isSingle = single;
+            return this;
+        }
+
+        public Builder setDisplayCamera(boolean displayCamera) {
+            isDisplayCamera = displayCamera;
             return this;
         }
 
