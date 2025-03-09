@@ -1,5 +1,7 @@
 package com.mh55.easy.ui.dialog;
 
+import static com.mh55.easy.ext.PerminssionExtKt.getImageDialogPermission;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -7,16 +9,27 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.luck.picture.lib.basic.PictureSelector;
 import com.luck.picture.lib.config.SelectMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.interfaces.OnResultCallbackListener;
 import com.luck.picture.lib.language.LanguageConfig;
+import com.luck.picture.lib.permissions.PermissionConfig;
 import com.mh55.easy.R;
+import com.mh55.easy.utils.LogUtil;
+import com.mh55.easy.utils.ToastUtil;
+import com.permissionx.guolindev.PermissionX;
+import com.permissionx.guolindev.callback.ExplainReasonCallback;
+import com.permissionx.guolindev.callback.ExplainReasonCallbackWithBeforeParam;
+import com.permissionx.guolindev.dialog.DefaultDialog;
+import com.permissionx.guolindev.request.ExplainScope;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -106,61 +119,121 @@ public class ImageSelectDialog extends BaseDialogFragment implements View.OnClic
      * 打开相册选择   可选图片  视频
      */
     private void openPhoto() {
-        dismiss();
-        PictureSelector.create(this)
-                .openGallery(chooseType)
-                .isPreviewImage(true)
-                .isPreviewVideo(true)
-                .setImageEngine(GlideEngine.createGlideEngine())
-                .setMaxSelectNum(isSingle?1:3)
-                .isPreviewAudio(true)
-                .setLanguage(LanguageConfig.CHINESE)
-                .isDisplayCamera(isDisplayCamera)
-                .forResult(new OnResultCallbackListener<LocalMedia>() {
-                    @Override
-                    public void onResult(ArrayList<LocalMedia> result) {
-                        List<String> list = new ArrayList<>();
-                         for (LocalMedia localMedia : result) {
-                             list.add(localMedia.getRealPath());
-                         }
-                         onSelectCallBackListener.selectCallBack(list);
+        PermissionX.init(this)
+                .permissions(PermissionConfig.getReadPermissionArray(mContext,chooseType))
+                .explainReasonBeforeRequest()
+                .onExplainRequestReason((explainScope, list, b) -> {
+                    if (b) {
+                        String msg =
+                                AppUtils.getAppName() + "需要多媒体权限进行图片获取,方便文件上传。";
+                        DefaultDialog dialog = new DefaultDialog(
+                                mContext,
+                                Arrays.asList(PermissionConfig.getReadPermissionArray(mContext, chooseType)),
+                                msg,
+                                "授权",
+                                "拒绝",
+                                mContext.getResources().getColor(R.color.color_333333),
+                                mContext.getResources().getColor(R.color.color_666666));
+                        explainScope.showRequestReasonDialog(dialog);
+
                     }
+                })
+                .request((allGranted, grantedList, deniedList) -> {
+                    if (allGranted){
+                        dismiss();
 
-                    @Override
-                    public void onCancel() {
+                        PictureSelector.create(this)
+                                .openGallery(chooseType)
+                                .isPreviewImage(true)
+                                .isPreviewVideo(true)
+                                .setImageEngine(GlideEngine.createGlideEngine())
+                                .setMaxSelectNum(isSingle ? 1 : 3)
+                                .isPreviewAudio(true)
+                                .setLanguage(LanguageConfig.CHINESE)
+                                .isDisplayCamera(isDisplayCamera)
+                                .forResult(new OnResultCallbackListener<LocalMedia>() {
+                                    @Override
+                                    public void onResult(ArrayList<LocalMedia> result) {
+                                        List<String> list = new ArrayList<>();
+                                        for (LocalMedia localMedia : result) {
+                                            list.add(localMedia.getRealPath());
+                                        }
+                                        onSelectCallBackListener.selectCallBack(list);
+                                    }
 
+                                    @Override
+                                    public void onCancel() {
+
+                                    }
+                                });
+                    }else {
+                        ToastUtil.INSTANCE.toast("权限获取不足,请前往设置中打开后重试",null);
                     }
                 });
+
     }
 
     /**
      * 打开相机
      */
     private void openCamera() {
-        dismiss();
-        if (chooseType == SelectMimeType.ofAudio()){
-            Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
-            startActivity(intent);
-        }else  {
-            PictureSelector.create(this)
-                    .openCamera(chooseType)
-                    .setLanguage(LanguageConfig.CHINESE)
-                    .forResult(new OnResultCallbackListener<LocalMedia>() {
-                        @Override
-                        public void onResult(ArrayList<LocalMedia> result) {
-                            List<String> list = new ArrayList<>();
-                            for (LocalMedia localMedia : result) {
-                                list.add(localMedia.getRealPath());
-                            }
-                            onSelectCallBackListener.selectCallBack(list);
-                        }
+        String[] p = PermissionConfig.getReadPermissionArray(mContext,SelectMimeType.ofVideo());
+        List<String> pList = new ArrayList<>();
+        pList.addAll(Arrays.asList(p));
+        pList.add("android.permission.CAMERA");
+        PermissionX.init(this)
+                .permissions(pList)
+                .explainReasonBeforeRequest()
+                .onExplainRequestReason((explainScope, list, b) -> {
+                    if (b) {
+                        String msg =
+                                AppUtils.getAppName() + "需要拍摄照片与录制视频权限,方便文件上传。";
+                        DefaultDialog dialog = new DefaultDialog(
+                                mContext,
+                                pList,
+                                msg,
+                                "授权",
+                                "拒绝",
+                                mContext.getResources().getColor(R.color.color_333333),
+                                mContext.getResources().getColor(R.color.color_666666));
+                        explainScope.showRequestReasonDialog(dialog);
 
-                        @Override
-                        public void onCancel() {
+                    }
+                })
+                .request((allGranted, grantedList, deniedList) -> {
+                    if (allGranted){
+                        dismiss();
+                        if (chooseType == SelectMimeType.ofAudio()) {
+                            Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+                            startActivity(intent);
+                        } else {
+                            PictureSelector.create(this)
+                                    .openCamera(chooseType)
+                                    .setLanguage(LanguageConfig.CHINESE)
+                                    .forResult(new OnResultCallbackListener<LocalMedia>() {
+                                        @Override
+                                        public void onResult(ArrayList<LocalMedia> result) {
+                                            List<String> list = new ArrayList<>();
+                                            for (LocalMedia localMedia : result) {
+                                                list.add(localMedia.getRealPath());
+                                            }
+                                            onSelectCallBackListener.selectCallBack(list);
+                                        }
 
+                                        @Override
+                                        public void onCancel() {
+
+                                        }
+                                    });
                         }
-                    });
-        }
+                    }else {
+                        LogUtil.d(grantedList);
+                        LogUtil.d(deniedList);
+                        ToastUtil.INSTANCE.toast("权限获取不足,请前往设置中打开后重试",null);
+                    }
+                });
+
+
     }
 
     public void show(FragmentManager manager) {

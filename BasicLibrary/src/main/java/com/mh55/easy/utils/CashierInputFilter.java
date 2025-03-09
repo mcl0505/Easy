@@ -77,9 +77,21 @@ public class CashierInputFilter implements InputFilter {
             if (!matcher.matches()) {
                 return "";
             } else {
-                if ((POINTER.equals(source) || ZERO.equals(source)) && TextUtils.isEmpty(destText)) {
+
+                if (source.length()>0){
+                    if (source.subSequence(0,1).equals(ZERO))
+                }else {
+
+                }
+
+
+//                if ((POINTER.equals(source) || ZERO.equals(source)) && TextUtils.isEmpty(destText)) {
+//                    return "";
+//                }
+                if ((POINTER.equals(source)) && TextUtils.isEmpty(destText)) {
                     return "";
                 }
+
             }
         }
 
