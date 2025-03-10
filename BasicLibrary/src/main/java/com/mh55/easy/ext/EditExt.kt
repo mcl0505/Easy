@@ -4,7 +4,7 @@ import android.text.Editable
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.EditText
-import com.mh55.easy.utils.CashierInputFilter
+import com.mh55.easy.utils.DecimalLimitInputFilter
 
 /**输入框赋值**/
 fun EditText.setEditContent(text: String?) {
@@ -34,6 +34,6 @@ fun EditText.showPassword() {
 }
 
 /**添加输入最大值限制**/
-fun EditText.addMinMax(maxValue: Int = Int.MAX_VALUE, pointerLength: Int = 2) {
-    this.filters = arrayOf(CashierInputFilter(maxValue, pointerLength))
+fun EditText.addMinMax(maxValue: Double = Double.MAX_VALUE, pointerLength: Int = 2) {
+    this.filters = arrayOf(DecimalLimitInputFilter(maxValue, pointerLength))
 }
