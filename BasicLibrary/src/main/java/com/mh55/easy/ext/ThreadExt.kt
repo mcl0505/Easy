@@ -81,5 +81,31 @@ fun countDown(
     }
 }
 
+fun AppCompatActivity.countDown(
+    timeMillis: Long = 1000,//默认时间间隔 1 秒
+    time: Int = 3,//默认时间为 3 秒
+    start: (scop: CoroutineScope) -> Unit,
+    end: () -> Unit,
+    next: (time: Int) -> Unit,
+    error: (msg: String?) -> Unit
+){
+    this.lifecycleScope.launch {
+        flow {
+            (time downTo 1).forEach {
+                delay(timeMillis)
+                emit(it)
+            }
+        }.onStart {
+            start(this@launch)
+        }.onCompletion {
+            end()
+        }.catch {
+            error(it.message ?: "countDown 出现未知错误")
+        }.collect {
+            next(it)
+        }
+    }
+}
+
 
 
