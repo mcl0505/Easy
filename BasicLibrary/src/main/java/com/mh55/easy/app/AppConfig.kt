@@ -18,6 +18,6 @@ object AppConfig {
         AppManager.register(application)
         ActivityRouter.init(mApplication)
         Utils.init(application)
-        CrashHelper.initCrashHandler(application)
+//        CrashHelper.initCrashHandler(application)
     }
 }

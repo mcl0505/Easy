@@ -138,6 +138,8 @@ dependencies {
 
     //TODO 图片选择器 https://github.com/LuckSiege/PictureSelector
     implementation 'io.github.lucksiege:pictureselector:v3.11.2'
+    implementation 'io.github.lucksiege:compress:v3.11.2'
+    implementation 'io.github.lucksiege:ucrop:v3.11.2'
     //TODO 安卓工具类库  https://www.jianshu.com/p/013fe78cc37c
     implementation 'com.blankj:utilcodex:1.31.1'
     //TODO 图形设置 ShapeView：https://github.com/getActivity/ShapeView

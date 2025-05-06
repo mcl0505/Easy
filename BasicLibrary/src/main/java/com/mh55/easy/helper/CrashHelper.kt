@@ -46,9 +46,9 @@ object CrashHelper : Thread.UncaughtExceptionHandler {
             //如果用户没有处理则让系统默认的 UncaughtExceptionHandler 来处理
             mDefaultHandler!!.uncaughtException(thread, throwable)
         } else {
-            SystemClock.sleep(1000)
-            //退出程序
-            Process.killProcess(Process.myPid())
+//            SystemClock.sleep(1000)
+//            //退出程序
+//            Process.killProcess(Process.myPid())
         }
     }
 

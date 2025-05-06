@@ -33,14 +33,25 @@
 
 -keep class com.mh.http.** { *; }
 
-#TODO  moshi
-# 保留Moshi的适配器工厂
--keepclassmembers class * extends com.squareup.moshi.FromJson {
-    *** call$(...);
+# Moshi 的保留规则
+-keep class com.squareup.moshi.** { *; }
+
+# 如果你使用了 Moshi 的 Kotlin 支持，保留注解以及相关的类
+-keep @interface com.squareup.moshi.Json
+-keep @interface com.squareup.moshi.JsonQualifier
+
+# 保留所有用了 Moshi 注解的类及其成员
+-keepclassmembers class ** {
+    @com.squareup.moshi.Json <fields>;
 }
--keepclassmembers class * extends com.squareup.moshi.ToJson {
-    *** call$(...);
+
+# 如果你在使用 Kotlin，则需要保持数据类不被混淆
+-keepclassmembers class ** {
+    *** *(...);
 }
+
+# 如果你使用了 Moshi 的自定义适配器(Adapter)，也需要保留它们
+-keep class **$$MoshiAdapter.** { *; }
 
 # 保留带有@JsonClass注解的类
 -keep @com.squareup.moshi.JsonClass class * { <fields>; }
