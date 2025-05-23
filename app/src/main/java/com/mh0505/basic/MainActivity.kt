@@ -10,18 +10,18 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
     override fun main(savedInstanceState: Bundle?) {
         with(mBinding){
             testBtn.singleClick {
-                ImageSelectDialog.Builder()
-                    .setSingle(true)
-                    .setCompress(true)
-                    .setEnableCrop(true)
-                    .setCircleCrop(true)
-                    .setDisplayCamera(false)
-                    .setWightHeight(1,1)
-                    .setOnSelectCallBackListener {
-
-                    }
-                    .build()
-                    .show(supportFragmentManager)
+//                ImageSelectDialog.Builder()
+//                    .setSingle(true)
+//                    .setCompress(true)
+//                    .setEnableCrop(true)
+//                    .setCircleCrop(true)
+//                    .setDisplayCamera(false)
+//                    .setWightHeight(1,1)
+//                    .setOnSelectCallBackListener {
+//
+//                    }
+//                    .build()
+//                    .show(supportFragmentManager)
             }
             testUserInfo.singleClick {
                 mViewModel.getUerInfo()
@@ -31,6 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
             }
             mDragView.isAdsorbent = false
             mDragView.onFloastClick = {
+
             }
 
         }

@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.luck.picture.lib.basic.PictureSelectionCameraModel;
 import com.luck.picture.lib.basic.PictureSelectionModel;
 import com.luck.picture.lib.basic.PictureSelector;
@@ -302,7 +303,8 @@ public class ImageSelectDialog extends BaseDialogFragment implements View.OnClic
                                     uCrop.setImageEngine(new UCropImageEngine() {
                                         @Override
                                         public void loadImage(Context context, String url, ImageView imageView) {
-                                            Glide.with(context).load(url).into(imageView);
+                                            Glide.with(context).load(url)
+                                                    .into(imageView);
                                         }
 
                                         @Override

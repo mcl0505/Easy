@@ -1,5 +1,6 @@
 package com.mh.http.moshi
 
+import android.provider.Settings
 import com.squareup.moshi.*
 import com.squareup.moshi.internal.Util
 import com.squareup.moshi.internal.Util.generatedAdapter
@@ -38,6 +39,9 @@ internal class MyKotlinJsonAdapter<T>(
     val options: JsonReader.Options) : JsonAdapter<T>() {
 
     override fun fromJson(reader: JsonReader): T {
+
+
+
         val constructorSize = constructor.parameters.size
 
         // Read each value into its slot in the array.
