@@ -148,8 +148,14 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
     isShowText: String = ConfigBuilder.RefreshPageConfig.mEmptyTipText,
     @LayoutRes emptyLayout: Int = 0,
     marginTop: Int = 150,
-    marginBottom: Int = 10
+    marginBottom: Int = 10,
+    textColor:Int = R.color.color_333333.getColor()
 ) {
+
+    if (mList == null){
+        this.setNewInstance(mutableListOf())
+    }
+
     //判断当前是否是刷新或者首次请求
     var isFirst = this.mOffset == 0
 
@@ -165,10 +171,11 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListOffset(
                     EmptyViewUtil.setEmptyView(
                         this.context,
                         this.recyclerView,
-                        mDrawable,
-                        isShowText,
+                        mDrawable = mDrawable,
+                        desc = isShowText,
                         marginTop = marginTop,
-                        marginBottom = marginBottom
+                        marginBottom = marginBottom,
+                        textColor = textColor
                     )
                 )
             } else {
@@ -200,8 +207,14 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListPage(
     mDrawable: Drawable = ConfigBuilder.RefreshPageConfig.mEmptyImage.toDrawable(),
     isShowText: String = ConfigBuilder.RefreshPageConfig.mEmptyTipText,
     @LayoutRes emptyLayout: Int = 0,
-    marginTop: Int = 150
+    marginTop: Int = 150,
+    marginBottom: Int = 10,
+    textColor:Int = R.color.color_333333.getColor()
 ) {
+    if (mList == null){
+        this.setNewInstance(mutableListOf())
+    }
+
     //判断当前是否是刷新或者首次请求
     var isFirst = this.mPage == 1
 
@@ -214,9 +227,11 @@ fun <T> BindAdapter<T, *>.setAdapterEmptyOrListPage(
                     EmptyViewUtil.setEmptyView(
                         this.context,
                         this.recyclerView,
-                        mDrawable,
-                        isShowText,
-                        marginTop = marginTop
+                        mDrawable = mDrawable,
+                        desc = isShowText,
+                        marginTop = marginTop,
+                        marginBottom = marginBottom,
+                        textColor = textColor
                     )
                 )
             } else {
