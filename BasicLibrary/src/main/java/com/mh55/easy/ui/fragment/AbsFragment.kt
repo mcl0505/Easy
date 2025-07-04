@@ -92,7 +92,7 @@ abstract class AbsFragment<V : ViewBinding, VM : BaseViewModel>(
      */
     override fun showLoading(msg: String) {
         mLoadingDialog = LoadingDialog(mContext, msg)
-        mLoadingDialog?.showDialog()
+        mLoadingDialog?.showDialog(mActivity)
     }
 
     /**

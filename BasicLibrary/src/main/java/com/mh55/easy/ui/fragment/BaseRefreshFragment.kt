@@ -23,13 +23,12 @@ abstract class BaseRefreshFragment<VDB : ViewDataBinding, BRVM : BaseViewModel, 
     open var mPage = 1
     lateinit var mAdapter: BindAdapter<T, VIDB>
 
-    open fun isResumeRefresh(): Boolean {
-        return false
-    }
+    /**是否启动懒加载进行网络请求   false=每次进入都会请求   true=首次进入请求**/
+    var isResumeRefresh = false
 
     override fun onResume() {
         super.onResume()
-        if (isResumeRefresh()) {
+        if (!isResumeRefresh) {
             mPage = 1
             mAdapter.mOffset = 0
             onRefreshData()
@@ -88,11 +87,11 @@ abstract class BaseRefreshFragment<VDB : ViewDataBinding, BRVM : BaseViewModel, 
             setEnableLoadMore(true)
         }
 
-        if (!isResumeRefresh()) {
-            mPage = 1
-            mAdapter.mOffset = 0
-            onRefreshData()
-        }
+//        if (!isResumeRefresh()) {
+//            mPage = 1
+//            mAdapter.mOffset = 0
+//            onRefreshData()
+//        }
     }
 
     open fun otherRecyclerViewSetting() {}
