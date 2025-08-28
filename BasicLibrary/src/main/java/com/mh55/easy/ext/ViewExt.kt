@@ -24,7 +24,7 @@ fun <T : View> T.singleClick(time: Int = 500, block: (T) -> Unit) {
         val curClickTime = SystemClock.uptimeMillis()
         val lastClickTime = (it.getTag(R.id.singleClickId) as? Long) ?: 0
         // 超过点击间隔后再将lastClickTime重置为当前点击时间
-        it.setTag(R.id.singleClickId, lastClickTime)
+        it.setTag(R.id.singleClickId, curClickTime)
         if (curClickTime - lastClickTime >= time) {
             block(it as T)
         }

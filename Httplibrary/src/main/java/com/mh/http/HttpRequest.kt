@@ -14,7 +14,6 @@ class HttpRequest {
     private val okHttpBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
     private val retrofit: Retrofit
 
-
     init {
         // 添加配置增加拦截器
         val interceptors = NetBase.interceptors

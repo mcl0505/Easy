@@ -34,6 +34,7 @@ abstract class BaseRefreshFragment<VDB : ViewDataBinding, BRVM : BaseViewModel, 
             onRefreshData()
         }
     }
+    
 
     override fun main(savedInstanceState: Bundle?) {
         initRecyclerRefresh()
